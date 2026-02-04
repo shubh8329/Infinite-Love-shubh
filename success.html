@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+    <title>Love Confirmation - Valentine's Day</title>
+    <link rel="stylesheet" href="form.css">
+    <style>
+        .success-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            animation: slideIn 0.3s ease-out, cardGlow 4s ease-in-out infinite;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-header {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .success-title {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: headerColor 6s ease-in-out infinite;
+        }
+
+        .success-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .submitted-data {
+            background: linear-gradient(135deg, #f5f5f5, #fff);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .data-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #4CAF50;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .data-value {
+            color: #333;
+            font-size: 16px;
+            word-break: break-word;
+        }
+
+        .names-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .name-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .name-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .name-value {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .heart-divider {
+            font-size: 24px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .shayri-section {
+            background: linear-gradient(135deg, #f5f5f5, #fff);
+            border-left: 4px solid #f093fb;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .shayri-text {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .shayri-author {
+            color: #764ba2;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-share {
+            background: linear-gradient(135deg, #f093fb 0%, #4facfe 100%);
+            color: white;
+        }
+
+        .btn-share:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.5);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f093fb;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design for Success Page */
+
+        /* Extra Small (320px - 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .success-card {
+                padding: 40px 20px;
+                border-radius: 8px;
+            }
+
+            .success-header {
+                font-size: 42px;
+                margin-bottom: 15px;
+            }
+
+            .success-title {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+
+            .success-message {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+
+            .submitted-data {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .names-container {
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+
+            .name-box {
+                padding: 15px 18px;
+                min-width: 80px;
+            }
+
+            .name-label {
+                font-size: 10px;
+            }
+
+            .name-value {
+                font-size: 16px;
+            }
+
+            .shayri-section {
+                padding: 18px;
+                margin: 20px 0;
+            }
+
+            .shayri-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .shayri-author {
+                font-size: 12px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
+        /* Small (481px - 768px) */
+        @media (max-width: 768px) and (min-width: 481px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .success-card {
+                padding: 50px 30px;
+                border-radius: 10px;
+                max-width: 100%;
+            }
+
+            .success-header {
+                font-size: 46px;
+                margin-bottom: 18px;
+            }
+
+            .success-title {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .success-message {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .submitted-data {
+                padding: 22px;
+                margin: 25px 0;
+            }
+
+            .names-container {
+                gap: 20px;
+                margin-bottom: 18px;
+            }
+
+            .name-box {
+                padding: 17px 25px;
+            }
+
+            .name-value {
+                font-size: 19px;
+            }
+
+            .shayri-section {
+                padding: 22px;
+                margin: 25px 0;
+            }
+
+            .shayri-text {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 22px;
+            }
+
+            .btn {
+                padding: 13px;
+                font-size: 15px;
+            }
+        }
+
+        /* Tablet (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            body {
+                padding: 30px 20px;
+            }
+
+            .success-card {
+                padding: 55px 35px;
+                max-width: 520px;
+            }
+
+            .success-header {
+                font-size: 48px;
+            }
+
+            .success-title {
+                font-size: 34px;
+            }
+
+            .names-container {
+                gap: 30px;
+            }
+
+            .name-box {
+                padding: 20px 30px;
+            }
+
+            .name-value {
+                font-size: 22px;
+            }
+
+            .shayri-text {
+                font-size: 17px;
+            }
+
+            .action-buttons {
+                gap: 15px;
+            }
+        }
+
+        /* Desktop (1025px - 1440px) */
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            body {
+                padding: 40px 20px;
+            }
+
+            .success-card {
+                padding: 60px 40px;
+                max-width: 550px;
+            }
+
+            .success-header {
+                font-size: 50px;
+            }
+
+            .success-title {
+                font-size: 36px;
+            }
+
+            .names-container {
+                gap: 35px;
+            }
+
+            .shayri-text {
+                font-size: 18px;
+            }
+        }
+
+        /* Large Desktop (1441px and above) */
+        @media (min-width: 1441px) {
+            .success-card {
+                padding: 65px 45px;
+                max-width: 600px;
+            }
+
+            .success-header {
+                font-size: 52px;
+            }
+
+            .success-title {
+                font-size: 40px;
+            }
+
+            .card-body {
+                padding: 50px 40px;
+                gap: 25px;
+            }
+
+            .names-container {
+                gap: 40px;
+            }
+
+            .name-box {
+                padding: 22px 35px;
+            }
+
+            .name-value {
+                font-size: 26px;
+            }
+
+            .shayri-text {
+                font-size: 20px;
+            }
+
+            .action-buttons {
+                gap: 20px;
+            }
+        }
+
+        /* Landscape Orientation */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                min-height: auto;
+                padding: 15px 20px;
+            }
+
+            .success-card {
+                padding: 30px 25px;
+            }
+
+            .success-header {
+                font-size: 40px;
+                margin-bottom: 10px;
+            }
+
+            .success-title {
+                font-size: 26px;
+                margin-bottom: 8px;
+            }
+
+            .submitted-data {
+                margin: 15px 0;
+                padding: 18px;
+            }
+
+            .names-container {
+                gap: 20px;
+                margin-bottom: 12px;
+            }
+
+            .shayri-section {
+                padding: 18px;
+                margin: 15px 0;
+            }
+
+            .shayri-text {
+                font-size: 14px;
+            }
+
+            .action-buttons {
+                margin-top: 12px;
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* High DPI/Retina Displays */
+        @media (-webkit-min-device-pixel-ratio: 2),
+               (min-resolution: 192dpi) {
+            .success-card {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            }
+
+            .name-box {
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.35);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <div class="success-header">💕</div>
+        <h1 class="success-title">Love Confirmed!</h1>
+        <p class="success-message">Your beautiful love story has been recorded. Forever together! 🎉</p>
+
+        <div class="submitted-data" id="submittedData">
+            <!-- Data will be populated by JavaScript -->
+        </div>
+
+        <div class="shayri-section" id="shayriSection">
+            <!-- Shayri will be populated by JavaScript -->
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-back" onclick="goBack()">Go Back</button>
+            <button class="btn btn-share" onclick="shareStory()">Share Story</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve and display submitted data
+        function displaySubmittedData() {
+            const loveNameOf = localStorage.getItem('loveNameOf') || 'My Love';
+            const yourName = localStorage.getItem('yourName') || 'Me';
+            const lineForLove = localStorage.getItem('lineForLove') || 'Not provided';
+            const meetingCity = localStorage.getItem('meetingCity') || 'Not provided';
+
+            const dataContainer = document.getElementById('submittedData');
+            dataContainer.innerHTML = `
+                <div class="names-container">
+                    <div class="name-box">
+                        <div class="name-label">Your Name</div>
+                        <div class="name-value">${escapeHtml(yourName)}</div>
+                    </div>
+                    <div class="heart-divider">💕</div>
+                    <div class="name-box">
+                        <div class="name-label">Your Love's Name</div>
+                        <div class="name-value">${escapeHtml(loveNameOf)}</div>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Your Love Message</div>
+                    <div class="data-value">"${escapeHtml(lineForLove)}"</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Where You Met</div>
+                    <div class="data-value">${escapeHtml(meetingCity)}</div>
+                </div>
+            `;
+        }
+
+        // Array of beautiful love shayris
+        const loveShayris = [
+            {
+                text: "तुम मेरी सांसों में बसे हो,\nतुम मेरे दिल की धड़कन हो।\nजিंदगी भर तुम्हारे साथ चलूंगा,\nतुम्हारे प्यार में ही मैं खो जाऊंगा।",
+                author: "- Love Poetry"
+            },
+            {
+                text: "तुम्हारी हर मुस्कुराहट मेरा फूल है,\nतुम्हारी हर बात मेरा सूल है।\nतुम्हारे बिना रंग है दुनिया रंगहीन,\nतुम हो मेरी सबसे खूबसूरत चीज़।",
+                author: "- Heart's Echo"
+            },
+            {
+                text: "जब तुम्हारी आंखों में देखता हूं,\nपूरी दुनिया भूल जाता हूं।\nतुम्हारा साथ, तुम्हारी बातें,\nमेरी हर रात को खूबसूरत बनातें।",
+                author: "- Soul's Song"
+            },
+            {
+                text: "तुम न सही फरिश्ता कोई,\nपर तुम मेरे लिए बहुत कुछ हो।\nजीवन की हर परीक्षा में साथ,\nतुम हो मेरे ख़ुदा का अरमान।",
+                author: "- Eternal Love"
+            },
+            {
+                text: "तुम्हारी याद में रातें बिताई हैं,\nतुम्हारे नाम की दुआएं सुनाई हैं।\nअब तो तुम मेरी कहानी हो,\nमेरी हर खुशबू, मेरा हर प्यार हो।",
+                author: "- Whispers of Heart"
+            },
+            {
+                text: "तुम्हारे हाथ का स्पर्श ही काफी है,\nतुम्हारी मुस्कान पूरी दुनिया है।\nसारी ख़ुशियां तुममें समाई हैं,\nतुम ही मेरी सबसे बड़ी दौलत हो।",
+                author: "- Love's Promise"
+            },
+            {
+                text: "हर सुबह तुम्हारा ख्याल लाती है,\nहर शाम तुम्हारी यादें सजाती है।\nतुम्हारे बिना जीवन अधूरा है,\nतुम ही मेरी हर साँस का हमसफर हो।",
+                author: "- Forever Yours"
+            },
+            {
+                text: "तुम मेरी खुशियों का कारण हो,\nतुम मेरे दर्द का साथी हो।\nइस ज़िंदगी में तुम्हारे साथ,\nमैं हर पल को खुदा का तोहफा समझता हूँ।",
+                author: "- Beloved"
+            },
+            {
+                text: "तुम्हारी बातों में मिठास है,\nतुम्हारे साथ रहना खुशक़िस्मती है।\nप्यार की इस यात्रा में तुम्हारे साथ,\nमैं अपने आप को सबसे अमीर महसूस करता हूँ।",
+                author: "- True Love"
+            },
+            {
+                text: "तुम न सिर्फ मेरा प्यार हो,\nतुम मेरा जीवन का सार हो।\nहर पल तुम्हारे साथ गुजारना,\nयही मेरी सबसे बड़ी खुशनसीबी है।",
+                author: "- Eternal Bond"
+            }
+        ];
+
+        // Function to get random shayri
+        function getRandomShayri() {
+            const randomIndex = Math.floor(Math.random() * loveShayris.length);
+            return loveShayris[randomIndex];
+        }
+
+        // Display random shayri
+        function displayShayri() {
+            const shayri = getRandomShayri();
+            const shayriSection = document.getElementById('shayriSection');
+            shayriSection.innerHTML = `
+                <div class="shayri-text">✨ ${shayri.text.replace(/\n/g, '<br>')} ✨</div>
+                <div class="shayri-author">${shayri.author}</div>
+            `;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Go back to form
+        function goBack() {
+            localStorage.clear();
+            window.location.href = 'form.html';
+        }
+
+        // Share story
+        function shareStory() {
+            const loveNameOf = localStorage.getItem('loveNameOf') || 'My Love';
+            const yourName = localStorage.getItem('yourName') || 'Me';
+            const lineForLove = localStorage.getItem('lineForLove') || 'I love you forever';
+            const meetingCity = localStorage.getItem('meetingCity') || 'a beautiful city';
+
+            const message = `💕 ${yourName} loves ${loveNameOf}! 💕\n\n"${lineForLove}"\n\nWe met in ${meetingCity}. 🌹\n\nCheck out our love story!`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Love Story',
+                    text: message
+                }).catch(err => console.log('Share cancelled'));
+            } else {
+                alert(message);
+            }
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#f093fb', '#4facfe', '#4CAF50', '#764ba2'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            displaySubmittedData();
+            displayShayri();
+            createConfetti();
+        });
+    </script>
+</body>
+</html>

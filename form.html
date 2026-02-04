@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+    <title>Valentine's Day Love Form</title>
+
+    <link rel="stylesheet" href="form.css">
+
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h1>Valentine's Day</h1>
+            <p>"You are my forever Valentine"</p>
+        </div>
+        <form class="card-body" id="loveForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name Of Your Love:</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Name:</label>
+                <input type="text" id="email" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="number">One Line For Your Love:</label>
+                <input type="text" id="number" placeholder="Enter your one line for your love" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Which City Did You Meet Your Love:</label>
+                <select id="city" required>
+                    <option value="">You Meet Your Love</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Nashik">Nashik</option>
+                    <option value="Dhule">Dhule</option>
+                    <option value="Amravati">Amravati</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">I Love You</button>
+        </form>
+        
+        <div class="share-section">
+            <p class="share-title">💕 Share This Love Form 💕</p>
+            <p class="share-subtitle">Invite your loved ones to express their love</p>
+            <div class="share-buttons">
+                <button class="share-btn whatsapp" onclick="shareOnWhatsApp()" title="Share on WhatsApp">
+                    <span class="share-icon">💬</span>
+                    <span class="share-text">WhatsApp</span>
+                </button>
+                <button class="share-btn facebook" onclick="shareOnFacebook()" title="Share on Facebook">
+                    <span class="share-icon">f</span>
+                    <span class="share-text">Facebook</span>
+                </button>
+                <button class="share-btn twitter" onclick="shareOnTwitter()" title="Share on Twitter">
+                    <span class="share-icon">𝕏</span>
+                    <span class="share-text">Twitter</span>
+                </button>
+                <button class="share-btn copy" onclick="copyLink()" title="Copy Link">
+                    <span class="share-icon">📋</span>
+                    <span class="share-text">Copy Link</span>
+                </button>
+            </div>
+            <div id="copyNotification" class="copy-notification">Link copied to clipboard! ✓</div>
+        </div>
+    </div>
+
+<script src="form.js"></script>
+<script>
+    // Get the current page URL
+    const pageUrl = window.location.href;
+    const pageTitle = 'Valentine\'s Day Love Form - Express Your Love! 💕';
+    const pageDescription = 'Share your beautiful love story. Fill out this form and celebrate your love on Valentine\'s Day!';
+
+    // Share on WhatsApp
+    function shareOnWhatsApp() {
+        const message = encodeURIComponent(`🌹 Hey! Check out this beautiful Valentine's Day Love Form:\n\n${pageTitle}\n\n${pageUrl}\n\nLet's express our love together! 💕`);
+        window.open(`https://wa.me/?text=${message}`, '_blank');
+    }
+
+    // Share on Facebook
+    function shareOnFacebook() {
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}&quote=${encodeURIComponent(pageTitle)}`;
+        window.open(facebookShareUrl, '_blank', 'width=600,height=400');
+    }
+
+    // Share on Twitter
+    function shareOnTwitter() {
+        const twitterText = encodeURIComponent(`${pageTitle}\n${pageUrl}\n#ValentinesDay #Love #2026`);
+        window.open(`https://twitter.com/intent/tweet?text=${twitterText}`, '_blank', 'width=600,height=400');
+    }
+
+    // Copy link to clipboard
+    function copyLink() {
+        const textArea = document.createElement('textarea');
+        textArea.value = pageUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+
+        // Show notification
+        const notification = document.getElementById('copyNotification');
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // Get form values
+        const loveNameOf = document.getElementById('name').value;
+        const yourName = document.getElementById('email').value;
+        const lineForLove = document.getElementById('number').value;
+        const meetingCity = document.getElementById('city').value;
+
+        // Store in localStorage
+        localStorage.setItem('loveNameOf', loveNameOf);
+        localStorage.setItem('yourName', yourName);
+        localStorage.setItem('lineForLove', lineForLove);
+        localStorage.setItem('meetingCity', meetingCity);
+
+        // Redirect to success page
+        window.location.href = 'success.html';
+    }
+</script>
+</body>
+</html>
