@@ -536,7 +536,7 @@
         </div>
 
         <div class="shayri-section" id="shayriSection">
-            <!-- Poetry will be populated by JavaScript -->
+            <!-- Shayri will be populated by JavaScript -->
         </div>
 
         <div class="action-buttons">
@@ -577,57 +577,57 @@
             `;
         }
 
-        // Array of beautiful love poems in English
+        // Array of beautiful love shayris
         const loveShayris = [
             {
-                text: "You dwell in my every breath,\nYou are the heartbeat of my heart.\nI will walk with you all my life,\nI will lose myself in your love.",
+                text: "तुम मेरी सांसों में बसे हो,\nतुम मेरे दिल की धड़कन हो।\nजিंदगी भर तुम्हारे साथ चलूंगा,\nतुम्हारे प्यार में ही मैं खो जाऊंगा।",
                 author: "- Love Poetry"
             },
             {
-                text: "Every smile of yours is my flower,\nEvery word you speak is my soul.\nWithout you, the world has no color,\nYou are the most beautiful thing I have.",
+                text: "तुम्हारी हर मुस्कुराहट मेरा फूल है,\nतुम्हारी हर बात मेरा सूल है।\nतुम्हारे बिना रंग है दुनिया रंगहीन,\nतुम हो मेरी सबसे खूबसूरत चीज़।",
                 author: "- Heart's Echo"
             },
             {
-                text: "When I look into your eyes,\nI forget the entire world.\nYour presence, your words,\nMake every night of mine beautiful.",
+                text: "जब तुम्हारी आंखों में देखता हूं,\nपूरी दुनिया भूल जाता हूं।\nतुम्हारा साथ, तुम्हारी बातें,\nमेरी हर रात को खूबसूरत बनातें।",
                 author: "- Soul's Song"
             },
             {
-                text: "You may not be an angel,\nBut you mean so much to me.\nIn every test of life, you're with me,\nYou are my heart's greatest desire.",
+                text: "तुम न सही फरिश्ता कोई,\nपर तुम मेरे लिए बहुत कुछ हो।\nजीवन की हर परीक्षा में साथ,\nतुम हो मेरे ख़ुदा का अरमान।",
                 author: "- Eternal Love"
             },
             {
-                text: "I have spent nights thinking of you,\nI have whispered prayers in your name.\nNow you are my story,\nYou are my every fragrance, my every love.",
+                text: "तुम्हारी याद में रातें बिताई हैं,\nतुम्हारे नाम की दुआएं सुनाई हैं।\nअब तो तुम मेरी कहानी हो,\nमेरी हर खुशबू, मेरा हर प्यार हो।",
                 author: "- Whispers of Heart"
             },
             {
-                text: "Your touch is more than enough,\nYour smile is my entire world.\nAll happiness is found in you,\nYou are my greatest treasure.",
+                text: "तुम्हारे हाथ का स्पर्श ही काफी है,\nतुम्हारी मुस्कान पूरी दुनिया है।\nसारी ख़ुशियां तुममें समाई हैं,\nतुम ही मेरी सबसे बड़ी दौलत हो।",
                 author: "- Love's Promise"
             },
             {
-                text: "Every morning brings your thought,\nEvery evening adorns your memories.\nLife is incomplete without you,\nYou are my companion in every breath.",
+                text: "हर सुबह तुम्हारा ख्याल लाती है,\nहर शाम तुम्हारी यादें सजाती है।\nतुम्हारे बिना जीवन अधूरा है,\nतुम ही मेरी हर साँस का हमसफर हो।",
                 author: "- Forever Yours"
             },
             {
-                text: "You are the reason for my joy,\nYou are the companion of my sorrow.\nIn this life with you,\nI feel blessed by every moment.",
+                text: "तुम मेरी खुशियों का कारण हो,\nतुम मेरे दर्द का साथी हो।\nइस ज़िंदगी में तुम्हारे साथ,\nमैं हर पल को खुदा का तोहफा समझता हूँ।",
                 author: "- Beloved"
             },
             {
-                text: "Your words are sweet,\nBeing with you is my fortune.\nIn this journey of love with you,\nI feel the richest in the world.",
+                text: "तुम्हारी बातों में मिठास है,\nतुम्हारे साथ रहना खुशक़िस्मती है।\nप्यार की इस यात्रा में तुम्हारे साथ,\nमैं अपने आप को सबसे अमीर महसूस करता हूँ।",
                 author: "- True Love"
             },
             {
-                text: "You are not just my love,\nYou are the essence of my life.\nSpending every moment with you,\nIs my greatest blessing.",
+                text: "तुम न सिर्फ मेरा प्यार हो,\nतुम मेरा जीवन का सार हो।\nहर पल तुम्हारे साथ गुजारना,\nयही मेरी सबसे बड़ी खुशनसीबी है।",
                 author: "- Eternal Bond"
             }
         ];
 
-        // Function to get random poem
+        // Function to get random shayri
         function getRandomShayri() {
             const randomIndex = Math.floor(Math.random() * loveShayris.length);
             return loveShayris[randomIndex];
         }
 
-        // Display random poem
+        // Display random shayri
         function displayShayri() {
             const shayri = getRandomShayri();
             const shayriSection = document.getElementById('shayriSection');
@@ -647,7 +647,7 @@
         // Go back to form
         function goBack() {
             localStorage.clear();
-            window.location.href = 'index.html';
+            window.location.href = 'form.html';
         }
 
         // Share story
